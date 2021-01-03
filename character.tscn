@@ -23,3 +23,4 @@ shape = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.946739, 0.322001, 0, -0.322001, 0.946739, 0, 3.94023, 7.01081 )
+doppler_tracking = 2

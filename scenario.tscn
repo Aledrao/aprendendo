@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://coin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://inimigo_quadrado_v.tscn" type="PackedScene" id=3]
+[ext_resource path="res://inimigo_quadrado_h.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -9,6 +11,19 @@
 albedo_color = Color( 0.301961, 0.501961, 0.227451, 1 )
 
 [sub_resource type="BoxShape" id=3]
+
+[sub_resource type="CapsuleShape" id=4]
+radius = 0.975391
+
+[sub_resource type="CylinderShape" id=5]
+radius = 0.358686
+height = 0.444414
+
+[sub_resource type="CapsuleShape" id=6]
+
+[sub_resource type="CylinderMesh" id=7]
+
+[sub_resource type="CylinderShape" id=8]
 
 [node name="Spatial" type="Spatial"]
 
@@ -24,9 +39,87 @@ shape = SubResource( 3 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.00579433, 0.999983, 0, -0.999983, 0.00579433, 0, 15.9236, 0 )
+shadow_enabled = true
 
 [node name="character" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53604, 0 )
 
+[node name="money" type="Area" parent="character"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="character/money"]
+shape = SubResource( 4 )
+
+[node name="foot" type="Area" parent="character"]
+transform = Transform( 1.74312, 0, 0, 0, -0.00120752, 0, 0, 0, 1.63315, 0, -1.62051, -0.172318 )
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="character/foot"]
+transform = Transform( 1.18194, 0, 0, 0, 456.328, 0, 0, 0, 1.18194, 0, 110.008, 0 )
+shape = SubResource( 5 )
+
+[node name="damage" type="Area" parent="character"]
+transform = Transform( 1.06528, 0, 0, 0, 0.992797, 0, 0, 0, 1.06528, 0.0201621, 0, -0.00352317 )
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="character/damage"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 6 )
+
 [node name="coin" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 0.077003, -1.25454e-08, 0, 1.30943, -26.0726 )
+
+[node name="coin3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 0.077003, -1.25454e-08, 5.17058, 1.30943, -26.0726 )
+
+[node name="coin2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 0.077003, -1.25454e-08, -4.8592, 1.30943, -26.0726 )
+
+[node name="plataforma" type="StaticBody" parent="."]
+transform = Transform( 70.229, 0, 0, 0, 0.0239896, 0, 0, 0, 54.5567, -25.7661, 10.0331, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="plataforma"]
+transform = Transform( -0.0934912, 0, 0, 0, 104.639, 0, 0, 0, -0.110543, 0, -303.146, 0 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="plataforma"]
+transform = Transform( -0.0914414, 0, 0, 0, 104.639, 0, 0, 0, -0.108119, 0, -303.146, 0 )
+shape = SubResource( 8 )
+
+[node name="plataforma2" type="StaticBody" parent="."]
+transform = Transform( 70.229, 0, 0, 0, 0.0168313, 0, 0, 0, 54.5567, -37.2241, 10.0332, 5.80402 )
+
+[node name="MeshInstance" type="MeshInstance" parent="plataforma2"]
+transform = Transform( -0.0934912, 0, 0, 0, 306.787, 0, 0, 0, -0.110543, 0, -303.146, 0 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="plataforma2"]
+transform = Transform( -0.0914414, 0, 0, 0, 306.787, 0, 0, 0, -0.108119, 0, -303.146, 0 )
+shape = SubResource( 8 )
+
+[node name="plataforma3" type="StaticBody" parent="."]
+transform = Transform( 70.229, 0, 0, 0, 0.0239896, 0, 0, 0, 54.5567, -37.0743, 10.0331, -6.37093 )
+
+[node name="MeshInstance" type="MeshInstance" parent="plataforma3"]
+transform = Transform( -0.0934912, 0, 0, 0, 299.858, 0, 0, 0, -0.110543, 0, -111.074, 0 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="plataforma3"]
+transform = Transform( -0.0914414, 0, 0, 0, 299.858, 0, 0, 0, -0.108119, 0, -111.074, 0 )
+shape = SubResource( 8 )
+
+[node name="inimigo_quadrado_h" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0604, 1.14083, -19.5423 )
+
+[node name="inimigo_quadrado_v" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.893, 1.14083, -19.5423 )
+[connection signal="area_entered" from="character/money" to="character" method="_on_money_area_entered"]
+[connection signal="body_entered" from="character/foot" to="character" method="_on_foot_body_entered"]
+[connection signal="body_entered" from="character/damage" to="character" method="_on_damage_body_entered"]
