@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://inimigo_quadrado_h.gd" type="Script" id=1]
 
@@ -8,6 +8,27 @@
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.898039, 0.113725, 0.113725, 1 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 2 )
+gravity = Vector3( 0, 0, -9.8 )
+initial_velocity = 1.13
+angular_velocity = 277.9
+angular_velocity_random = 0.16
+linear_accel = -5.26
+linear_accel_random = 0.19
+radial_accel = -5.26
+radial_accel_random = 0.19
+tangential_accel_random = 0.23
+damping = 3.51
+angle_random = 0.07
+
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 0.4, 0.4, 0.4 )
 
 [node name="inimigo_quadrado_h" type="StaticBody"]
 collision_layer = 4
@@ -19,3 +40,9 @@ shape = SubResource( 1 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
+
+[node name="Particles" type="Particles" parent="."]
+material_override = SubResource( 4 )
+emitting = false
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )
